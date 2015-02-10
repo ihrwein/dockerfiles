@@ -16,6 +16,9 @@ curl -sL https://static.rust-lang.org/dist/rust-nightly-$triple.tar.gz | tar xvz
 curl -sL https://static.rust-lang.org/cargo-dist/cargo-nightly-$triple.tar.gz | tar xvz -C /tmp
 /tmp/cargo-nightly-$triple/install.sh
 
+# install new gdb (needed to use rust-gdb)
+echo "deb http://http.debian.net/debian jessie main" > /etc/apt/sources.list.d/jessie.list && apt-get update && apt-get install -y gdb -t jessie && rm /etc/apt/sources.list.d/jessie.list && apt-get update
+
 # cleanup package manager
 apt-get remove --purge -y curl && apt-get autoclean && apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
